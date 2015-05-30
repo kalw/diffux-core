@@ -51,13 +51,8 @@ module Diffux
                     elem.size.height)
         image.save(@outfile)
       end
-      begin
-        Timeout.timeout(10) do
-          driver.quit unless @driver
-        end
-      rescue Timeout::Error
-        driver.close
-      end
+      
+      driver.quit
       result
     end
 
