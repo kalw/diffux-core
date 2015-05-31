@@ -36,9 +36,9 @@ OptionParser.new do |opts|
     options[:useragent] = ua
   end
   
-  opts.on('-d', '--driver DRIVER',
-          'Set a specific selenium driver aka browser to be used, i.e. chrome, firefox, phantomjs...') do |drv|
-    options[:driver] = drv
+  opts.on('-b', '--browser BROWSER',
+          'Set a specific selenium browser to be used, i.e. chrome, firefox, phantomjs, remote...') do |bs|
+    options[:browser] = bs
   end
 
   opts.on_tail('-h', '--help', 'Show this message') do
@@ -63,5 +63,5 @@ Diffux::Snapshotter.new(
   user_agent:     options[:useragent],
   outfile:        options[:outfile],
   url:            options[:url],
-  driver:         options[:driver]
+  browser:         options[:browser]
 ).take_snapshot!
