@@ -36,7 +36,7 @@ module Diffux
     #   title [String] the <title> of the page being snapshotted
     #   log   [String] a log of events happened during the snapshotting process
     def take_snapshot!
-      driver = Selenium::WebDriver.for(:driver)
+      driver = Selenium::WebDriver.for :"#{driver}"
       driver.manage.window.resize_to(@viewport_width, @viewport_width * 16 / 9)
       driver.navigate.to @url
       disable_animations(driver)
