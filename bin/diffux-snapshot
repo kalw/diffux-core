@@ -35,6 +35,11 @@ OptionParser.new do |opts|
           'Set a useragent header when loading the url') do |ua|
     options[:useragent] = ua
   end
+  
+  opts.on('-d', '--driver DRIVER',
+          'Set a specific selenium driver aka browser to be used, i.e. chrome, firefox, phantomjs...') do |drv|
+    options[:driver] = drv
+  end
 
   opts.on_tail('-h', '--help', 'Show this message') do
     puts opts
@@ -57,5 +62,6 @@ Diffux::Snapshotter.new(
   crop_selector:  options[:crop_selector],
   user_agent:     options[:useragent],
   outfile:        options[:outfile],
-  url:            options[:url]
+  url:            options[:url],
+  driver:         options[:driver]
 ).take_snapshot!
