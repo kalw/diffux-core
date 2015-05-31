@@ -21,13 +21,14 @@ module Diffux
     #   used to speed things up).
     def initialize(url:     raise, viewport_width: raise,
                    outfile: raise, user_agent: nil,
-                   crop_selector: nil, driver: 'firefox')
+                   crop_selector: nil, driver: nil, browser: 'firefox')
       @viewport_width = viewport_width
       @crop_selector  = crop_selector
       @user_agent     = user_agent
       @outfile        = outfile
       @url            = url
       @driver         = driver
+      @browser        = browser
     end
 
     # Takes a snapshot of the URL and saves it in the outfile as a PNG image.
@@ -36,7 +37,7 @@ module Diffux
     #   title [String] the <title> of the page being snapshotted
     #   log   [String] a log of events happened during the snapshotting process
     def take_snapshot!
-      driver = Selenium::WebDriver.for :"#{driver}"
+      driver = @driver || Selenium::WebDriver.for :"#{browser}"
       driver.manage.window.resize_to(@viewport_width, @viewport_width * 16 / 9)
       driver.navigate.to @url
       disable_animations(driver)
