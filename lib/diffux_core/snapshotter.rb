@@ -21,7 +21,7 @@ module Diffux
     #   used to speed things up).
     def initialize(url:     raise, viewport_width: raise,
                    outfile: raise, user_agent: nil,
-                   crop_selector: nil, driver: nil)
+                   crop_selector: nil, driver: 'firefox')
       @viewport_width = viewport_width
       @crop_selector  = crop_selector
       @user_agent     = user_agent
@@ -36,7 +36,7 @@ module Diffux
     #   title [String] the <title> of the page being snapshotted
     #   log   [String] a log of events happened during the snapshotting process
     def take_snapshot!
-      driver = @driver || Selenium::WebDriver.for(:firefox)
+      driver = Selenium::WebDriver.for(:driver)
       driver.manage.window.resize_to(@viewport_width, @viewport_width * 16 / 9)
       driver.navigate.to @url
       disable_animations(driver)
